@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Tasks</h1>
+    <ul>
+      <li v-for="task in tasks">
+        {{ task.text }}
+      </li>
+    </ul>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<style>
+</style>
 
+<script>
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+  data: function() {
+    return {
+      tasks: [
+        { id: 1, text: "Take out the garbage", completed: false },
+        { id: 2, text: "Make the bed", completed: false },
+        { id: 3, text: "Mow the lawn", completed: false }
+      ]
+    };
+  },
+  created: function() {},
+  methods: {},
+  computed: {}
+};
 </script>
