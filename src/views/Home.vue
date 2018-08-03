@@ -4,7 +4,7 @@
     <input v-model="newTask.text">
     <button v-on:click="addTask()">Add task</button>
 
-    <h1>Tasks</h1>
+    <h1>Tasks ({{ numIncompleteTasks() }} remaining)</h1>
     <ul>
       <li v-for="task in tasks" v-on:click="completeTask(task)">
         <span v-bind:class="{completed: task.completed}">{{ task.text }}</span>
@@ -43,6 +43,15 @@ export default {
       // var index = this.tasks.indexOf(inputTask);
       // this.tasks.splice(index, 1);
       inputTask.completed = !inputTask.completed;
+    },
+    numIncompleteTasks: function() {
+      var count = 0;
+      this.tasks.forEach(function(task) {
+        if (!task.completed) {
+          count += 1;
+        }
+      });
+      return count;
     }
   },
   computed: {}
