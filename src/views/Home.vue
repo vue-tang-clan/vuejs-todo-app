@@ -7,13 +7,16 @@
     <h1>Tasks</h1>
     <ul>
       <li v-for="task in tasks" v-on:click="completeTask(task)">
-        {{ task.text }}
+        <span v-bind:class="{completed: task.completed}">{{ task.text }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <style>
+.completed {
+  text-decoration: line-through;
+}
 </style>
 
 <script>
@@ -37,8 +40,9 @@ export default {
       }
     },
     completeTask: function(inputTask) {
-      var index = this.tasks.indexOf(inputTask);
-      this.tasks.splice(index, 1);
+      // var index = this.tasks.indexOf(inputTask);
+      // this.tasks.splice(index, 1);
+      inputTask.completed = !inputTask.completed;
     }
   },
   computed: {}
