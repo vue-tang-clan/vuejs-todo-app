@@ -5,6 +5,7 @@
     <button v-on:click="addTask()">Add task</button>
 
     <h1>Tasks ({{ numIncompleteTasks() }} remaining)</h1>
+    <button v-on:click="deleteCompletedTasks()">Clear completed tasks</button>
     <ul>
       <li v-for="task in tasks" v-on:click="completeTask(task)">
         <span v-bind:class="{completed: task.completed}">{{ task.text }}</span>
@@ -52,6 +53,15 @@ export default {
         }
       });
       return count;
+    },
+    deleteCompletedTasks: function() {
+      var incompleteTasks = [];
+      this.tasks.forEach(function(task) {
+        if (!task.completed) {
+          incompleteTasks.push(task);
+        }
+      });
+      this.tasks = incompleteTasks;
     }
   },
   computed: {}
