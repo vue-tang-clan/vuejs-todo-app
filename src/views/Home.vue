@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div id="map"></div>
     <h1>Add a task</h1>
     <input v-model="newTask.text">
     <button v-on:click="addTask()">Add task</button>
@@ -18,9 +19,15 @@
 .completed {
   text-decoration: line-through;
 }
+
+#map {
+  height: 300px;
+}
 </style>
 
 <script>
+/* global google */
+
 export default {
   data: function() {
     return {
@@ -32,7 +39,17 @@ export default {
       newTask: { text: "", completed: false }
     };
   },
-  created: function() {},
+  mounted: function() {
+    // The location of Uluru
+    var uluru = { lat: -25.344, lng: 131.036 };
+    // The map, centered at Uluru
+    var map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: uluru
+    });
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({ position: uluru, map: map });
+  },
   methods: {
     addTask: function() {
       if (this.newTask.text) {
